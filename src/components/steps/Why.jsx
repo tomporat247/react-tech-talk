@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button } from "@material-ui/core";
 
 const Why = () => {
+  console.log("render Why");
   const [movies, setMovies] = useState([
     { id: "12", title: "Star Wars" },
     { id: "23", title: "Batman" },
