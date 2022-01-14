@@ -11,6 +11,7 @@ import Why from "./steps/Why";
 import LogFun from "./steps/LogFun";
 import Conditionals from "./steps/Conditionals";
 import Dependencies from "./steps/Dependencies";
+import Performance from "./steps/Performance";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -47,6 +48,10 @@ const getSteps = () => {
     {
       title: "Dependencies",
       content: <Dependencies> </Dependencies>,
+    },
+    {
+      title: "Performance",
+      content: <Performance> </Performance>,
     },
   ];
 };
