@@ -10,6 +10,7 @@ import { Container } from "@material-ui/core";
 import Why from "./steps/Why";
 import LogFun from "./steps/LogFun";
 import Conditionals from "./steps/Conditionals";
+import Dependencies from "./steps/Dependencies";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,6 +43,10 @@ const getSteps = () => {
     {
       title: "Conditionals",
       content: <Conditionals> </Conditionals>,
+    },
+    {
+      title: "Dependencies",
+      content: <Dependencies> </Dependencies>,
     },
   ];
 };
@@ -95,8 +100,9 @@ const HorizontalLinearStepper = () => {
                 color="primary"
                 onClick={handleNext}
                 className={classes.button}
+                disabled={activeStep === steps.length - 1}
               >
-                {activeStep === steps.length - 1 ? "Finish" : "Next"}
+                Next
               </Button>
             </div>
           </div>
