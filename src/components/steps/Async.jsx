@@ -44,7 +44,9 @@ const Items = () => {
   }, []);
 
   return loading ? (
-    <CircularProgress />
+    <div>
+      <CircularProgress />
+    </div>
   ) : (
     <ul>
       {items.map((item) => (
