@@ -13,6 +13,7 @@ import Dependencies from "./steps/Dependencies";
 import Performance from "./steps/Performance";
 import Async from "./steps/Async";
 import { Link, useParams } from "react-router-dom";
+import elements from "./steps/Elements";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,6 +34,10 @@ const getSteps = () => {
     {
       title: "JSX",
       content: <Jsx> </Jsx>,
+    },
+    {
+      title: "Elements",
+      content: <elements> </elements>,
     },
     {
       title: "Why?",
