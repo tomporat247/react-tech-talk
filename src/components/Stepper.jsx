@@ -1,4 +1,3 @@
-import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
@@ -13,6 +12,7 @@ import Conditionals from "./steps/Conditionals";
 import Dependencies from "./steps/Dependencies";
 import Performance from "./steps/Performance";
 import Async from "./steps/Async";
+import { Link, useParams } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -63,15 +63,9 @@ const getSteps = () => {
 
 const HorizontalLinearStepper = () => {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(0);
+  const { step } = useParams();
+  const activeStep = +(step ?? 0);
   const steps = getSteps();
-
-  const handleNext = () =>
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
 
   return (
     <div className={classes.root}>
@@ -98,17 +92,19 @@ const HorizontalLinearStepper = () => {
             <Container>{steps[activeStep].content}</Container>
             <div className={classes.buttonRow}>
               <Button
+                component={Link}
+                to={`/${activeStep - 1}`}
                 disabled={activeStep === 0}
-                onClick={handleBack}
                 className={classes.button}
               >
                 Back
               </Button>
 
               <Button
+                component={Link}
+                to={`/${activeStep + 1}`}
                 variant="contained"
                 color="primary"
-                onClick={handleNext}
                 className={classes.button}
                 disabled={activeStep === steps.length - 1}
               >
