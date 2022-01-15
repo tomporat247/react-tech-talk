@@ -70,16 +70,13 @@ const HorizontalLinearStepper = () => {
   return (
     <div className={classes.root}>
       <Stepper activeStep={activeStep}>
-        {steps.map(({ title }) => {
-          const stepProps = {};
-          const labelProps = {};
-          return (
-            <Step key={title} {...stepProps}>
-              <StepLabel {...labelProps}>{title}</StepLabel>
-            </Step>
-          );
-        })}
+        {steps.map(({ title }) => (
+          <Step key={title}>
+            <StepLabel>{title}</StepLabel>
+          </Step>
+        ))}
       </Stepper>
+
       <div>
         {activeStep === steps.length ? (
           <div>
