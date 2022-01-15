@@ -1,6 +1,6 @@
-import {memo, useState} from "react";
-import {makeStyles} from "@material-ui/core/styles";
-import {Checkbox, Chip, Paper} from "@material-ui/core";
+import { memo, useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import { Checkbox, Chip, FormControlLabel, Paper } from "@material-ui/core";
 import TagFacesIcon from "@material-ui/icons/TagFaces";
 
 const useStyles = makeStyles((theme) => ({
@@ -53,15 +53,17 @@ const Performance = () => {
         selectedProducts={selectedProducts}
         onProductClick={onProductClick}
       />
-      <div>
-        Pay Now
-        <Checkbox
-          checked={payNow}
-          onChange={() => setPayNow(!payNow)}
-          color="primary"
-          inputProps={{ "aria-label": "secondary checkbox" }}
-        />
-      </div>
+      <FormControlLabel
+        control={
+          <Checkbox
+            checked={payNow}
+            onChange={() => setPayNow(!payNow)}
+            color="primary"
+            inputProps={{ "aria-label": "secondary checkbox" }}
+          />
+        }
+        label="Pay Now"
+      />
     </>
   );
 };

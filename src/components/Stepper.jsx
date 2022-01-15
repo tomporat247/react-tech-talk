@@ -12,6 +12,7 @@ import LogFun from "./steps/LogFun";
 import Conditionals from "./steps/Conditionals";
 import Dependencies from "./steps/Dependencies";
 import Performance from "./steps/Performance";
+import Async from "./steps/Async";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -52,6 +53,10 @@ const getSteps = () => {
     {
       title: "Performance",
       content: <Performance> </Performance>,
+    },
+    {
+      title: "Async",
+      content: <Async> </Async>,
     },
   ];
 };
