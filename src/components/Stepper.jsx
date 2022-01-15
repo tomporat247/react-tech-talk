@@ -39,10 +39,6 @@ const getSteps = () => {
       content: <Why> </Why>,
     },
     {
-      title: "Log Fun",
-      content: <LogFun> </LogFun>,
-    },
-    {
       title: "Conditionals",
       content: <Conditionals> </Conditionals>,
     },
@@ -53,6 +49,10 @@ const getSteps = () => {
     {
       title: "Performance",
       content: <Performance> </Performance>,
+    },
+    {
+      title: "Log Fun",
+      content: <LogFun> </LogFun>,
     },
     {
       title: "Async",

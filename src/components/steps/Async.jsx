@@ -25,7 +25,7 @@ const Async = () => {
         }
         label="Show Items"
       />
-      {showItems ? <Items /> : <div>other</div>}
+      {showItems ? <Items /> : <div>Not Showing Items</div>}
     </>
   );
 };
