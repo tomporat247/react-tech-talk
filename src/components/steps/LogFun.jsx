@@ -7,7 +7,6 @@ const LogFun = () => {
   const onClick = () => {
     console.log("D", setValue(value + 1));
 
-    // TODO: In the presentation explain this - used to get the updated value
     setValue((arg) => {
       const newValue = arg + 1;
       console.log("E", newValue);
