@@ -1,18 +1,17 @@
-import { makeStyles } from "@material-ui/core/styles";
+import {makeStyles} from "@material-ui/core/styles";
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Jsx from "./steps/Jsx";
-import { Container } from "@material-ui/core";
+import {Container} from "@material-ui/core";
 import Why from "./steps/Why";
 import LogFun from "./steps/LogFun";
 import Conditionals from "./steps/Conditionals";
-import Dependencies from "./steps/Dependencies";
 import Performance from "./steps/Performance";
 import Async from "./steps/Async";
-import { Link, useParams } from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,10 +40,6 @@ const getSteps = () => {
     {
       title: "Conditionals",
       content: <Conditionals> </Conditionals>,
-    },
-    {
-      title: "Dependencies",
-      content: <Dependencies> </Dependencies>,
     },
     {
       title: "Performance",
