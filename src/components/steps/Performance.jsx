@@ -18,8 +18,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Performance = () => {
-  console.log("rendered parent");
-
   const [selectedProducts, setSelectedProducts] = useState([]);
   const [payNow, setPayNow] = useState(true);
 
@@ -70,8 +68,6 @@ const Performance = () => {
 
 const Cart = memo(
   ({ availableCartProducts, selectedProducts, onProductClick }) => {
-    console.log("rendered child");
-
     const classes = useStyles();
 
     const selectedProductSet = new Set(selectedProducts);
