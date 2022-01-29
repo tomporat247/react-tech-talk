@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { Button } from "@material-ui/core";
+import { v4 as uuid } from "uuid";
 
 const Why = () => {
   console.log("render Why");
   const [movies, setMovies] = useState([
-    { id: "12", title: "Star Wars" },
-    { id: "23", title: "Batman" },
-    { id: "53", title: "Interstellar" },
-    { id: "34", title: "Coach Carter" },
+    { id: uuid(), title: "Star Wars" },
+    { id: uuid(), title: "Batman" },
+    { id: uuid(), title: "Interstellar" },
+    { id: uuid(), title: "Coach Carter" },
   ]);
 
   const reverseMovies = () => setMovies(movies.reverse());
