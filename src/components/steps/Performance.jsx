@@ -30,9 +30,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const initialItems = [
-  { id: uuid(), name: "Star Wars" },
-  { id: uuid(), name: "Batman" },
-  { id: uuid(), name: "Interstellar" },
+    { id: uuid(), name: "Star Wars" },
+    { id: uuid(), name: "Batman" },
+    { id: uuid(), name: "Interstellar" },
+    { id: uuid(), name: "Coach Carte" },
+    { id: uuid(), name: "Law Abiding Citizen" },
+    { id: uuid(), name: "Memento" },
+    { id: uuid(), name: "Spiderman" },
 ];
 
 const Performance = () => {
