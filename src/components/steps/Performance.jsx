@@ -1,94 +1,124 @@
-import { memo, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Checkbox, Chip, FormControlLabel, Paper } from "@material-ui/core";
-import TagFacesIcon from "@material-ui/icons/TagFaces";
+import { IconButton, InputBase, Paper, TextField } from "@material-ui/core";
+import AddIcon from "@material-ui/icons/Add";
+import DeleteIcon from "@material-ui/icons/Delete";
+import { useRef, useState } from "react";
+import { v4 as uuid } from "uuid";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
+  addNewRoot: {
+    padding: "2px 4px",
+    marginBottom: "16px",
     display: "flex",
-    justifyContent: "center",
-    flexWrap: "wrap",
-    listStyle: "none",
-    padding: theme.spacing(0.5),
-    margin: 0,
+    alignItems: "center",
+    width: 400,
   },
-  chip: {
-    margin: theme.spacing(0.5),
+  input: {
+    marginLeft: theme.spacing(1),
+    flex: 1,
   },
+  iconButton: {
+    padding: 10,
+  },
+  itemContainer: {
+    display: "flex",
+    flexDirection: "column",
+    width: "60%",
+  },
+  movieContainer: { display: "flex", alignItems: "center" },
+  movieText: { width: "100%" },
 }));
 
+const initialItems = [
+  { id: uuid(), name: "Star Wars" },
+  { id: uuid(), name: "Batman" },
+  { id: uuid(), name: "Interstellar" },
+];
+
 const Performance = () => {
-  const [selectedProducts, setSelectedProducts] = useState([]);
-  const [payNow, setPayNow] = useState(true);
+  const classes = useStyles();
+  const [movies, setMovies] = useState(initialItems);
 
-  const onProductClick = (product) => {
-    let updatedSelectedProducts;
-
-    if (selectedProducts.includes(product)) {
-      updatedSelectedProducts = selectedProducts.filter(
-        (selectedProduct) => selectedProduct !== product
-      );
-    } else {
-      updatedSelectedProducts = [...selectedProducts, product];
+  const onaAddMovie = (movieName) => {
+    if (movies.every(({ name }) => name !== movieName)) {
+      setMovies([...movies, { id: uuid(), name: movieName }]);
     }
-
-    setSelectedProducts(updatedSelectedProducts);
   };
 
-  const availableCartProducts = [
-    "Apple",
-    "Milk",
-    "Bread",
-    "Krembo",
-    "Rice",
-    "Chips",
-  ];
+  const onDeleteMovie = (idToDelete) =>
+    setMovies(movies.filter(({ id }) => id !== idToDelete));
+
+  const onChangeMovie = (idToChange, newName) =>
+    setMovies(
+      movies.map((movie) =>
+        movie.id === idToChange ? { ...movie, name: newName } : movie
+      )
+    );
 
   return (
     <>
-      <Cart
-        availableCartProducts={availableCartProducts}
-        selectedProducts={selectedProducts}
-        onProductClick={onProductClick}
-      />
-      <FormControlLabel
-        control={
-          <Checkbox
-            checked={payNow}
-            onChange={() => setPayNow(!payNow)}
-            color="primary"
-            inputProps={{ "aria-label": "secondary checkbox" }}
+      <Header onAddMovie={onaAddMovie} />
+      <div className={classes.itemContainer}>
+        {movies.map(({ id, name }) => (
+          <Movie
+            key={id}
+            text={name}
+            onChange={(newName) => onChangeMovie(id, newName)}
+            onDelete={() => onDeleteMovie(id)}
           />
-        }
-        label="Pay Now"
-      />
+        ))}
+      </div>
     </>
   );
 };
 
-const Cart = memo(
-  ({ availableCartProducts, selectedProducts, onProductClick }) => {
-    const classes = useStyles();
+const Header = ({ onAddMovie }) => {
+  const classes = useStyles();
+  const inputRef = useRef();
 
-    const selectedProductSet = new Set(selectedProducts);
+  const [name, setName] = useState("");
+  const onAdd = () => {
+    onAddMovie(name);
+    setName("");
+    inputRef.current.focus();
+  };
 
-    return (
-      <Paper component="ul" className={classes.root}>
-        {availableCartProducts.map((product) => (
-          <li key={product}>
-            <Chip
-              icon={
-                selectedProductSet.has(product) ? <TagFacesIcon /> : undefined
-              }
-              label={product}
-              className={classes.chip}
-              onClick={() => onProductClick(product)}
-            />
-          </li>
-        ))}
-      </Paper>
-    );
-  }
-);
+  return (
+    <Paper component="form" className={classes.addNewRoot}>
+      <InputBase
+        inputRef={inputRef}
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        className={classes.input}
+        placeholder="Add Item"
+      />
+      <IconButton
+        className={classes.iconButton}
+        onClick={onAdd}
+        disabled={name.length === 0}
+      >
+        <AddIcon />
+      </IconButton>
+    </Paper>
+  );
+};
+
+const Movie = ({ text, onDelete, onChange }) => {
+  const classes = useStyles();
+
+  return (
+    <div className={classes.movieContainer}>
+      <TextField
+        className={classes.movieText}
+        value={text}
+        variant="filled"
+        onChange={(e) => onChange(e.target.value)}
+      />
+      <IconButton onClick={onDelete}>
+        <DeleteIcon />
+      </IconButton>
+    </div>
+  );
+};
 
 export default Performance;
