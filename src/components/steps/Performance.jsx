@@ -105,6 +105,7 @@ const Header = ({ onAddMovie }) => {
 
 const Movie = ({ text, onDelete, onChange }) => {
   const classes = useStyles();
+  console.log('rendered', text);
 
   return (
     <div className={classes.movieContainer}>
