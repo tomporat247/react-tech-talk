@@ -20,6 +20,7 @@ import { Link, useParams } from "react-router-dom";
 import { Check } from "@material-ui/icons";
 import clsx from "clsx";
 import PropTypes from "prop-types";
+import Batching from "./steps/Batching";
 
 const theme = createTheme({
   palette: {
@@ -132,6 +133,10 @@ const getSteps = () => {
     {
       title: "Conditionals",
       content: <Conditionals> </Conditionals>,
+    },
+    {
+      title: "Batching",
+      content: <Batching> </Batching>,
     },
     {
       title: "Performance",
