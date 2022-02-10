@@ -1,8 +1,7 @@
 import { makeStyles } from "@material-ui/core/styles";
-import { IconButton, InputBase, Paper, TextField } from "@material-ui/core";
-import AddIcon from "@material-ui/icons/Add";
-import DeleteIcon from "@material-ui/icons/Delete";
-import { useRef, useState } from "react";
+import { TextField } from "@material-ui/core";
+import MovieIcon from "@material-ui/icons/Slideshow";
+import { useState } from "react";
 import { v4 as uuid } from "uuid";
 
 const useStyles = makeStyles((theme) => ({
@@ -30,27 +29,18 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const initialItems = [
-    { id: uuid(), name: "Star Wars" },
-    { id: uuid(), name: "Batman" },
-    { id: uuid(), name: "Interstellar" },
-    { id: uuid(), name: "Coach Carte" },
-    { id: uuid(), name: "Law Abiding Citizen" },
-    { id: uuid(), name: "Memento" },
-    { id: uuid(), name: "Spiderman" },
+  { id: uuid(), name: "Star Wars" },
+  { id: uuid(), name: "Batman" },
+  { id: uuid(), name: "Interstellar" },
+  { id: uuid(), name: "Coach Carte" },
+  { id: uuid(), name: "Law Abiding Citizen" },
+  { id: uuid(), name: "Memento" },
+  { id: uuid(), name: "Spiderman" },
 ];
 
 const Performance = () => {
   const classes = useStyles();
   const [movies, setMovies] = useState(initialItems);
-
-  const onaAddMovie = (movieName) => {
-    if (movies.every(({ name }) => name !== movieName)) {
-      setMovies([...movies, { id: uuid(), name: movieName }]);
-    }
-  };
-
-  const onDeleteMovie = (idToDelete) =>
-    setMovies(movies.filter(({ id }) => id !== idToDelete));
 
   const onChangeMovie = (idToChange, newName) =>
     setMovies(
@@ -60,56 +50,21 @@ const Performance = () => {
     );
 
   return (
-    <>
-      <Header onAddMovie={onaAddMovie} />
-      <div className={classes.itemContainer}>
-        {movies.map(({ id, name }) => (
-          <Movie
-            key={id}
-            text={name}
-            onChange={(newName) => onChangeMovie(id, newName)}
-            onDelete={() => onDeleteMovie(id)}
-          />
-        ))}
-      </div>
-    </>
+    <div className={classes.itemContainer}>
+      {movies.map(({ id, name }) => (
+        <Movie
+          key={id}
+          text={name}
+          onChange={(newName) => onChangeMovie(id, newName)}
+        />
+      ))}
+    </div>
   );
 };
 
-const Header = ({ onAddMovie }) => {
+const Movie = ({ text, onChange }) => {
   const classes = useStyles();
-  const inputRef = useRef();
-
-  const [name, setName] = useState("");
-  const onAdd = () => {
-    onAddMovie(name);
-    setName("");
-    inputRef.current.focus();
-  };
-
-  return (
-    <Paper component="form" className={classes.addNewRoot}>
-      <InputBase
-        inputRef={inputRef}
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        className={classes.input}
-        placeholder="Add Item"
-      />
-      <IconButton
-        className={classes.iconButton}
-        onClick={onAdd}
-        disabled={name.length === 0}
-      >
-        <AddIcon />
-      </IconButton>
-    </Paper>
-  );
-};
-
-const Movie = ({ text, onDelete, onChange }) => {
-  const classes = useStyles();
-  console.log('rendered', text);
+  console.log("rendered", text);
 
   return (
     <div className={classes.movieContainer}>
@@ -119,9 +74,7 @@ const Movie = ({ text, onDelete, onChange }) => {
         variant="filled"
         onChange={(e) => onChange(e.target.value)}
       />
-      <IconButton onClick={onDelete}>
-        <DeleteIcon />
-      </IconButton>
+      <MovieIcon />
     </div>
   );
 };
