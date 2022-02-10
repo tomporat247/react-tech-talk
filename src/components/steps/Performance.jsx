@@ -42,37 +42,31 @@ const Performance = () => {
   const classes = useStyles();
   const [movies, setMovies] = useState(initialItems);
 
-  const onChangeMovie = (idToChange, newName) =>
+  const onChangeMovie = (newMovie) =>
     setMovies(
-      movies.map((movie) =>
-        movie.id === idToChange ? { ...movie, name: newName } : movie
-      )
+      movies.map((movie) => (movie.id === newMovie.id ? newMovie : movie))
     );
 
   return (
     <div className={classes.itemContainer}>
-      {movies.map(({ id, name }) => (
-        <Movie
-          key={id}
-          text={name}
-          onChange={(newName) => onChangeMovie(id, newName)}
-        />
+      {movies.map((movie) => (
+        <Movie key={movie.id} movie={movie} onChange={onChangeMovie} />
       ))}
     </div>
   );
 };
 
-const Movie = ({ text, onChange }) => {
+const Movie = ({ movie, onChange }) => {
   const classes = useStyles();
-  console.log("rendered", text);
+  console.log("rendered", movie.name);
 
   return (
     <div className={classes.movieContainer}>
       <TextField
         className={classes.movieText}
-        value={text}
+        value={movie.name}
         variant="filled"
-        onChange={(e) => onChange(e.target.value)}
+        onChange={(e) => onChange({ ...movie, name: e.target.value })}
       />
       <MovieIcon />
     </div>
