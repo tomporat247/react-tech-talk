@@ -127,6 +127,10 @@ const getSteps = () => {
       content: <Jsx> </Jsx>,
     },
     {
+      title: "Log Fun",
+      content: <LogFun> </LogFun>,
+    },
+    {
       title: "Why?",
       content: <Why> </Why>,
     },
@@ -141,10 +145,6 @@ const getSteps = () => {
     {
       title: "Performance",
       content: <Performance> </Performance>,
-    },
-    {
-      title: "Log Fun",
-      content: <LogFun> </LogFun>,
     },
     {
       title: "Async",
